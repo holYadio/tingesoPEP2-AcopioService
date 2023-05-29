@@ -38,6 +38,25 @@ public class AcopioController {
         return ResponseEntity.ok(acopios);
     }
 
+    @GetMapping("/byquincenaproveedor/{quincena}/{proveedor}")
+    public ResponseEntity<List<Acopio>> getByQuincenaAndProveedor(@PathVariable(value = "quincena") String quincena,
+                                                                  @PathVariable(value = "proveedor") String proveedor){
+        List<Acopio> acopios = acopioService.getAcopioByQuincenaAndProveedor(quincena, proveedor);
+        if(acopios.isEmpty())
+            return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(acopios);
+    }
+
+    @GetMapping("/klsleche")
+    public double getKlsLeche(@RequestBody List<Acopio> acopios){
+        return acopioService.klsTotalLeche(acopios);
+    }
+
+    @GetMapping("/diasleche")
+    public double diasEnvioLeche(@RequestBody List<Acopio> acopios){
+        return acopioService.diasEnvioLeche(acopios);
+    }
+
     @PostMapping()
     public ResponseEntity<Acopio> createAcopio(@RequestBody Acopio acopio){
         Acopio newAcopio = acopioService.createAcopio(acopio);
