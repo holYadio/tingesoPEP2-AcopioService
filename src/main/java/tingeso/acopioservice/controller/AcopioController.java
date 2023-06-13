@@ -3,6 +3,8 @@ package tingeso.acopioservice.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import tingeso.acopioservice.entity.Acopio;
 import tingeso.acopioservice.service.AcopioService;
 
@@ -46,22 +48,11 @@ public class AcopioController {
             return ResponseEntity.notFound().build();
         return ResponseEntity.ok(acopios);
     }
-
-    @GetMapping("/klsleche")
-    public double getKlsLeche(@RequestBody List<Acopio> acopios){
-        return acopioService.klsTotalLeche(acopios);
-    }
-
-    @GetMapping("/diasleche")
-    public double diasEnvioLeche(@RequestBody List<Acopio> acopios){
-        return acopioService.diasEnvioLeche(acopios);
-    }
-
     @PostMapping()
-    public ResponseEntity<Acopio> createAcopio(@RequestBody Acopio acopio){
-        Acopio newAcopio = acopioService.createAcopio(acopio);
-        if(newAcopio == null)
-            return ResponseEntity.noContent().build();
-        return ResponseEntity.ok(newAcopio);
+    public void createAcopio(@RequestParam("file") MultipartFile file,
+                             RedirectAttributes ms){
+        acopioService.guardarAcopio(file);
+        ms.addFlashAttribute("mensaje", "Se ha subido correctamente el archivo " + file.getOriginalFilename() + "!");
+        acopioService.leerArchivoAcopio(file.getOriginalFilename());
     }
 }

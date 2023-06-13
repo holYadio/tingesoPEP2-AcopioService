@@ -1,0 +1,10 @@
+INSERT INTO acopio(fecha,turno,proveedor,kls_leche) VALUES ('2023/03/17','M','01001','50');
+INSERT INTO acopio(fecha,turno,proveedor,kls_leche) VALUES ('2023/03/18','T','01001','50');
+INSERT INTO acopio(fecha,turno,proveedor,kls_leche) VALUES ('2023/03/18','M','01003','35');
+INSERT INTO acopio(fecha,turno,proveedor,kls_leche) VALUES ('2023/03/18','M','01002','30');
+INSERT INTO acopio(fecha,turno,proveedor,kls_leche) VALUES ('2023/03/18','T','02004','25');
+INSERT INTO acopio(fecha,turno,proveedor,kls_leche) VALUES ('2023/03/10','M','01001','50');
+INSERT INTO acopio(fecha,turno,proveedor,kls_leche) VALUES ('2023/03/10','T','01001','100');
+INSERT INTO acopio(fecha,turno,proveedor,kls_leche) VALUES ('2023/03/12','N','01003','35');
+INSERT INTO acopio(fecha,turno,proveedor,kls_leche) VALUES ('2023/03/13','M','01002','30');
+INSERT INTO acopio(fecha,turno,proveedor,kls_leche) VALUES ('2023/03/14','T','02004','25');
