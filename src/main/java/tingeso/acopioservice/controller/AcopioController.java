@@ -40,9 +40,9 @@ public class AcopioController {
         return ResponseEntity.ok(acopios);
     }
 
-    @GetMapping("/byquincenaproveedor/{quincena}/{proveedor}")
-    public ResponseEntity<List<Acopio>> getByQuincenaAndProveedor(@PathVariable(value = "quincena") String quincena,
-                                                                  @PathVariable(value = "proveedor") String proveedor){
+    @GetMapping("/byquincenaproveedor/")
+    public ResponseEntity<List<Acopio>> getByQuincenaAndProveedor(@RequestParam(value = "quincena") String quincena,
+                                                                  @RequestParam(value = "proveedor") String proveedor){
         List<Acopio> acopios = acopioService.getAcopioByQuincenaAndProveedor(quincena, proveedor);
         if(acopios.isEmpty())
             return ResponseEntity.notFound().build();
@@ -54,5 +54,6 @@ public class AcopioController {
         acopioService.guardarAcopio(file);
         ms.addFlashAttribute("mensaje", "Se ha subido correctamente el archivo " + file.getOriginalFilename() + "!");
         acopioService.leerArchivoAcopio(file.getOriginalFilename());
+        acopioService.borrarArchivo(file.getOriginalFilename());
     }
 }

@@ -10,6 +10,7 @@ import tingeso.acopioservice.entity.Acopio;
 import tingeso.acopioservice.repository.AcopioRepository;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -91,7 +92,7 @@ public class AcopioService {
     public String guardarAcopio(MultipartFile file) {
         String fileName = file.getOriginalFilename();
         if (fileName != null){
-            if ((!file.isEmpty()) && (fileName.toUpperCase().equals("DATA.TXT"))){
+            if (!file.isEmpty()){
                 try{
                     byte [] bytes = file.getBytes();
                     Path path = Paths.get(file.getOriginalFilename());
@@ -142,6 +143,21 @@ public class AcopioService {
             catch (IOException e){
                 logg.error("Error", e);
             }
+        }
+    }
+
+    public void borrarArchivo(String nombreArchivo) {
+        File archivo = new File(nombreArchivo);
+
+        if (archivo.exists()) {
+            boolean resultado = archivo.delete();
+            if (resultado) {
+                System.out.println("Archivo borrado exitosamente.");
+            } else {
+                System.out.println("No se pudo borrar el archivo.");
+            }
+        } else {
+            System.out.println("El archivo no existe.");
         }
     }
 
