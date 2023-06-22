@@ -8,6 +8,10 @@ spring:
     config:
       enabled: true
       uri: http://localhost:8081
+      fail-fast: true
+      retry:
+        max-attempts: 200
+        max-interval: 10000
   datasource:
     url: jdbc:postgresql://localhost:5432/bdmicros
     username: postgres
@@ -17,3 +21,9 @@ spring:
     hibernate:
       ddl-auto: update
       dialect: org.hibernate.dialect.PostgreSQLDialect
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          "*"
